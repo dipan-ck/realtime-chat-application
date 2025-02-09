@@ -14,7 +14,7 @@ function Chatbox() {
 
     return (
         <div className="flex-1 relative w-[92%] overflow-y-auto p-2 md:p-4">
-            {messages.map((message, index) => (
+            {Array.isArray(messages) ? messages.map((message, index) => (
                 <div
                     key={message._id || index} // Ensure unique key
                     className={`mb-2 md:mb-4 ${message.senderId === authUser._id ? "text-right" : "text-left"}`}
@@ -35,7 +35,7 @@ function Chatbox() {
                         </span>
                     )}
                 </div>
-            ))}
+            )) : null}
             {/* Dummy div to ensure scrolling to the bottom */}
             <div ref={chatEndRef} />
         </div>

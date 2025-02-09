@@ -8,48 +8,34 @@ import cors from "cors";
 import {app, io, server} from "./lib/socket.js";
 import path from "path";
 
-
 const __dirname = path.resolve();
 
 app.use(cors({
     origin: "http://localhost:5173",
     credentials: true,
-    
 }));
-
-
-
 
 dotenv.config({ path: "../.env" });
 
-
 connectDB();
-
-
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}))
 app.use(cookieParser());
 
-
-if(process.env.NODE_ENV === "production"){
+if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../client/dist")));
 
+    app.get(/^\/(?!api).*/, (req, res) => {
+        res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+    });
 }
 
-app.get("*", (req, res)=>{
-    res.sendFile(path.join(__dirname, "../client/dist/index.html"));
-})
-
-
-
 const PORT = process.env.PORT;
-
 
 app.use("/api/auth", authRoute);
 app.use("/api/message", messageRoutes);
 
 server.listen(PORT, ()=>{
     console.log("Server is running on port", PORT);
-    
-})
+});

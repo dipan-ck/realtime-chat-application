@@ -3,7 +3,7 @@ import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 
-const BASE_URL =import.meta.env.MODE === "development" ? "http://localhost:3000/": "/";
+const BASE_URL =import.meta.env.MODE === "development" ? "http://localhost:3000": "/";
 
 export const useAuthStore = create((set, get) => ({
   authUser: null,
@@ -33,7 +33,7 @@ export const useAuthStore = create((set, get) => ({
   signup: async (formData) => {
     set({ isSigningup: true });
     try {
-      const res = await axiosInstance.post("api/auth/signup", formData);
+      const res = await axiosInstance.post("/api/auth/signup", formData);
       toast.success("Account created Successfully");
       set({ authUser: res.data });
       get().connectSocket();
@@ -46,7 +46,7 @@ export const useAuthStore = create((set, get) => ({
 
   logout: async () => {
     try {
-      await axiosInstance.post("api/auth/logout");
+      await axiosInstance.post("/api/auth/logout");
       set({ authUser: null });
       toast.success("Logged out Successfully");
       get().disConnectSocket();
@@ -58,7 +58,7 @@ export const useAuthStore = create((set, get) => ({
   login: async (formData) => {
     try {
       set({ isLoggingin: true });
-      const res = await axiosInstance.post("api/auth/login", formData);
+      const res = await axiosInstance.post("/api/auth/login", formData);
       toast.success("Logged in Successfully");
       set({ authUser: res.data });
       get().connectSocket();
@@ -72,7 +72,7 @@ export const useAuthStore = create((set, get) => ({
   updateProfile: async (formData) => {
     try {
       set({ isUpdatingProfile: true });
-      const res = await axiosInstance.put("api/auth/update-profile", formData);
+      const res = await axiosInstance.put("/api/auth/update-profile", formData);
       set({ authUser: res.data });
       toast.success("Profile updated Successfully");
     } catch (error) {

@@ -19,19 +19,21 @@ function Chatbox() {
                       <div
                           key={message._id || index}
                           className={`flex mb-2 md:mb-4 ${
-                              message.senderId === authUser.__id ? "justify-end" : "justify-start"
+                              message.senderId === authUser._id ? "justify-end" : "justify-start"
                           }`}
                       >
                           {message.image ? (
                               <img
                                   src={message.image}
                                   alt="Message content"
-                                  className="inline-block max-w-xs md:max-w-md rounded-lg"
+                                  className={`inline-block max-w-xs md:max-w-md rounded-lg ${
+                                      message.senderId === authUser._id ? "max-h-40" : ""
+                                  }`}
                               />
                           ) : (
                               <span
                                   className={`inline-block p-2 rounded-lg text-sm md:text-base ${
-                                      message.senderId === authUser.__id ? "bg-blue-500 text-white" : "bg-gray-700 text-white"
+                                      message.senderId === authUser._id ? "bg-blue-500 text-white" : "bg-gray-700 text-white"
                                   }`}
                               >
                                   {message.text}

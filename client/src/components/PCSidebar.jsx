@@ -13,14 +13,6 @@ function PCSidebar() {
       getAllUsers();
    }, [getAllUsers])
    
-   useEffect(() => {
-      console.log('Users:', users);
-      console.log('Type of users:', typeof users);
-      console.log('Is users an array:', Array.isArray(users));
-      if (!Array.isArray(users)) {
-        console.error('Users is not an array:', users);
-      }
-   }, [users]);
 
   return (
     <div className='bg-[#0b0b0b] h-[98%] flex flex-col justify-between w-[18rem] py-4 px-2'>

@@ -19,7 +19,6 @@ function HomePage() {
 
     const handleMediaQueryChange = (event) => {
       setIsSidebarOpen(event.matches);
-      console.log('Sidebar open:', event.matches);
     };
 
     // Set the initial state based on the current screen size
@@ -37,7 +36,7 @@ function HomePage() {
   return (
    
     <>
-    <MobileSidebar clickedUsers={clickedUsers} setClickedUsers={setClickedUsers}/>  
+   
     <div className='bg-[#0b0b0b] w-[100vw] h-[100vh] relative flex flex-row justify-evenly items-center'>
 
       {!isSidebarOpen && (     <div  onClick={() => {

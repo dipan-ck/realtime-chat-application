@@ -6,8 +6,8 @@ import { useAuthStore } from '../store/useAuthStore'
 import { useChatStore } from '../store/useChatStore'
 
 function PCSidebar() {
-   const {users, getAllUsers} = useChatStore();
-   const {onlineUsers} = useAuthStore();
+   const { users, getAllUsers } = useChatStore(); // Ensure users is defined here
+   const { onlineUsers } = useAuthStore();
 
    useEffect(() => {
       getAllUsers();

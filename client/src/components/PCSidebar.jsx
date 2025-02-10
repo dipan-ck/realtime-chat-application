@@ -6,13 +6,14 @@ import { useAuthStore } from '../store/useAuthStore'
 import { useChatStore } from '../store/useChatStore'
 
 function PCSidebar() {
-   const { users, getAllUsers } = useChatStore(); // Ensure users is defined here
+   const { users, getAllUsers } = useChatStore();
    const { onlineUsers } = useAuthStore();
 
    useEffect(() => {
       getAllUsers();
-   }, [getAllUsers])
-   
+   }, [getAllUsers]);
+
+
 
   return (
     <div className='bg-[#0b0b0b] h-[98%] flex flex-col justify-between w-[18rem] py-4 px-2'>
@@ -26,9 +27,9 @@ function PCSidebar() {
           Array.isArray(users) ? 
           users.length > 0 ? (
             users.map((user, index) => {
-              const isOnlione = onlineUsers.includes(user._id);
+              const isOnline = onlineUsers.includes(user._id);
               return (
-                <User key={index} status={isOnlione} id={user._id} name={user.fullName} profilePic={user.profilePic} />
+                <User key={index} status={isOnline} id={user._id} name={user.fullName} profilePic={user.profilePic} />
               );
             })
           ) : (
